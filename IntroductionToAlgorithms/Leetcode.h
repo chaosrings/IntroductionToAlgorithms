@@ -6,100 +6,14 @@
 #include <stack>
 #include  <queue>
 #include <set>
+#include <unordered_set>
 #include <iostream>
 #include <algorithm>
+#include "algorithms.h"
+#include "DataStructures.h"
 using namespace std;
-#define UINT unsigned int
-struct ListNode
-{
-	int val;
-	ListNode *next;
-	ListNode(int x) :val(x), next(NULL) {};
-};
-struct Interval {
-	int start;
-	int end;
-	Interval() : start(0), end(0) {}
-	Interval(int s, int e) : start(s), end(e) {}
-};
-struct TreeNode
-{
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
+using namespace DataStructures;
 
-TreeNode* BuildTree(const vector<string> &vec)
-{
-	if (vec.size() == 0)
-		return NULL;
-	vector<TreeNode*>  tmp(vec.size(), NULL);
-	for (unsigned int i = 0; i < vec.size(); ++i)
-	{
-		if (vec[i] == "null")
-			continue;
-		else
-		{
-			tmp[i + 1] = new TreeNode(stoi(vec[i]));
-		}
-	}
-	
-	for (unsigned int i = 1; i <= tmp.size()/2; ++i)
-	{
-		if (tmp[i] != NULL)
-		{
-			tmp[i]->left = tmp[2 * i];
-			tmp[i]->right = tmp[2 * i + 1];
-		}
-	}
-	return tmp[1];
-}
-class DisJointSet
-{
-private:
-	vector<int> theArray;
-public:
-	DisJointSet(int num)
-	{
-		theArray.resize(num);
-		for (int i = 0; i < num; i++)
-		{
-			theArray[i] = -1;
-		}
-	}
-	~DisJointSet()
-	{
-		theArray.clear();
-	}
-	void unionSet(int root1, int root2)//按大小求并
-	{
-		if (theArray[root1] <= theArray[root2])
-		{
-			theArray[root1] += theArray[root2];
-			theArray[root2] = root1;
-		}
-		else
-			unionSet(root2, root1);
-	}
-	int find(int root)
-	{
-		if (theArray[root]<0)
-			return root;
-		else
-			return theArray[root] = find(theArray[root]);
-	}
-	int getDisJointSetNum()
-	{
-		int cnt = 0;
-		for (unsigned int i = 0; i<theArray.size(); ++i)
-		{
-			if (theArray[i] < 0)
-				cnt++;
-		}
-		return cnt;
-	}
-};
 void printLongestPalindromeStr(string str, const vector<vector<int> > &dp_result, int i, int j, string& ans)
 {
 	if (i > j)
@@ -131,11 +45,11 @@ string getLongestPalindromeStr(string str)
 {
 	vector<int > aline(str.size(), 0);
 	vector<vector<int> > dp(str.size(), aline);
-	for (UINT i = 0; i < dp.size(); ++i)
+	for (unsigned int  i = 0; i < dp.size(); ++i)
 		dp[i][i] = 1;
-	for (UINT l = 2; l <= str.size(); ++l)
+	for (unsigned int l = 2; l <= str.size(); ++l)
 	{
-		for (UINT i = 0; i <= str.size() - l; ++i)
+		for (unsigned int i = 0; i <= str.size() - l; ++i)
 		{
 			int j = i + l - 1;
 			if (str[i] == str[j])
@@ -171,9 +85,9 @@ string getLCS(string str1, string str2)
 {
 	vector<int> aline(str2.size()+1, 0);
 	vector<vector<int> > dp(str1.size()+1, aline);
-	for (UINT i = 1; i <= str1.size(); ++i)
+	for (unsigned int i = 1; i <= str1.size(); ++i)
 	{
-		for (UINT j = 1; j <= str2.size(); ++j)
+		for (unsigned int j = 1; j <= str2.size(); ++j)
 		{
 			dp[i][j] = str1[i] == str2[j] ? (dp[i - 1][j - 1] + 1) : max(dp[i - 1][j], dp[i][j - 1]);
 		}
@@ -705,7 +619,7 @@ namespace Leetcode34
 	}
 }
 
-namespace Leetcode49
+namespace Leetcode49_1
 {
 	class Solution {
 	public:

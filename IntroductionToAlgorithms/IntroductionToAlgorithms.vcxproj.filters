@@ -23,5 +23,20 @@
     <ClInclude Include="Leetcode.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="secondPartLeetcode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Review.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdPartLeetcode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
